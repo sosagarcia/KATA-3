@@ -1,7 +1,8 @@
 package javaapplication1;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.util.ArrayList;
+
+
 
 public class JavaApplication1 {
 
@@ -10,27 +11,18 @@ public class JavaApplication1 {
        
         
        Histogram<String> histogram = new Histogram<>();
-       
        String pathName = "C:\\Users\\usuario\\Documents\\NetBeansProjects\\JavaApplication1\\Data\\emails.txt";
-        
-        try {
-            BufferedReader fileIn = new BufferedReader (new FileReader(pathName));
+       MailReader dominios = new MailReader(pathName);
+       ArrayList <String> domis =dominios.getDominiosArray();
+        for (int i = 0; i < domis.size(); i++) {
+            histogram.increment(domis.get(i));
             
-            String mail;
-            
-            while((mail=fileIn.readLine()) != null){
-                if(!mail.contains("@"))
-                    continue;                
-                histogram.increment(mail.split("@")[1]);
-            }
-        } catch (Exception e) {
         }
+ 
+        
+
        
-       
-       
-       
-      
-       
+
        HistogramaDisplay histo;
         histo = new HistogramaDisplay(histogram);
         histo.execute();
