@@ -1,5 +1,8 @@
 package javaapplication1;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class JavaApplication1 {
 
 
@@ -7,31 +10,26 @@ public class JavaApplication1 {
        
         
        Histogram<String> histogram = new Histogram<>();
-       histogram.increment("gmail.com");
-       histogram.increment("gmail.com");
-       histogram.increment("gmail.com");
-       histogram.increment("gmail.com");
-       histogram.increment("gmail.com");
        
-       histogram.increment("hotmail.com");
-       histogram.increment("hotmail.com");
-       histogram.increment("hotmail.com");
-       histogram.increment("hotmail.com");
-       histogram.increment("hotmail.com");
+       String pathName = "C:\\Users\\usuario\\Documents\\NetBeansProjects\\JavaApplication1\\Data\\emails.txt";
+        
+        try {
+            BufferedReader fileIn = new BufferedReader (new FileReader(pathName));
+            
+            String mail;
+            
+            while((mail=fileIn.readLine()) != null){
+                if(!mail.contains("@"))
+                    continue;                
+                histogram.increment(mail.split("@")[1]);
+            }
+        } catch (Exception e) {
+        }
        
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
-       histogram.increment("ulpgc.es");
+       
+       
+       
+      
        
        HistogramaDisplay histo;
         histo = new HistogramaDisplay(histogram);
